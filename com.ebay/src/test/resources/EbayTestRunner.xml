@@ -8,10 +8,11 @@
         <!--            </run>-->
         <!--        </groups>-->
         <classes>
-            <class name="testPom.TestHomepage"/>
+<!--            <class name="testPom.TestHomepage"/>-->
+            <class name="testPom.TestLetsKodeIt"></class>
         </classes>
     </test>
 
-        <parameter name="url" value="https://www.ebay.com"/>
-        <parameter name="browser" value="chrome"/>
+    <parameter name="url" value="https://courses.letskodeit.com/practice"/>
+    <parameter name="browserName" value="chrome"/>
 </suite>

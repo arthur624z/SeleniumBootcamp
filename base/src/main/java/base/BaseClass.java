@@ -133,10 +133,23 @@ public class BaseClass {
      */
 
     public WebElement safeFindElement(By by) {
-        WebElement element = driver.findElement(by);
-
-        return element;
+        return driver.findElement(by);
     }
+
+    public void dismissAlert() {
+        driver.switchTo().alert().dismiss();
+    }
+
+    public void confirmAlert() {
+        driver.switchTo().alert().accept();
+    }
+
+    public String getTextFromAlert() {
+        return driver.switchTo().alert().getText();
+    }
+
+
+
 
     public void sendKeysToInput(WebElement element, String keys) {
         driverWait.until(ExpectedConditions.visibilityOf(element));
@@ -170,6 +183,16 @@ public class BaseClass {
     public void clickJScript(WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor)driver;
         js.executeScript("arguments[0].click();", element);
+    }
+
+    public void createJSAlert(String alertText) {
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("alert('" + alertText + "');");
+    }
+
+    public void scrollJS(int numOfPixelsToScroll) {
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("window.scrollBy(0," + numOfPixelsToScroll + ")");
     }
 
     /*
