@@ -6,6 +6,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.Date;
 import java.util.List;
@@ -56,6 +57,15 @@ public class Homepage extends BaseClass {
     @FindBy (css = "div.flex-auto.calendar-month-container.two-month.ng-star-inserted.last-month jb-calendar-month")
     public WebElement secondMonth;
 
+    public void searchForFlight(String fromCity, String toCity) {
+        sendKeysToTravelFromCity(fromCity);
+        selectFromCity();
+        sendKeysToTravelToCity(toCity);
+        selectToCity();
+
+
+    }
+
     public void acceptCookiesPopUpWindow() {
         boolean flag = true;
 
@@ -69,13 +79,17 @@ public class Homepage extends BaseClass {
             try {
                 clickOnElement(acceptAllCookiesButton);
             } catch (NoSuchElementException e) {
-
+                e.printStackTrace();
             }
         }
     }
 
     public void sendKeysToTravelFromCity(String keys) {
         sendKeysToInput(fromInput, keys);
+    }
+
+    public void sendKeysToTravelToCity(String keys) {
+        sendKeysToInput(toInput, keys);
     }
 
     public void selectFromCity() {
@@ -86,16 +100,13 @@ public class Homepage extends BaseClass {
         clickOnElement(losAngelesComboBoxOption);
     }
 
-    public void sendKeysToTravelToCity(String keys) {
-        sendKeysToInput(toInput, keys);
+    public void selectDepartureDate() {
+        waitForElementToBeVisible(calendarDatePicker);
+
     }
 
-    public void clickOnDepart() {
-        clickOnElement(departInput);
-    }
+    public void selectReturnDate() {
 
-    public void clickOnReturn() {
-        clickOnElement(returnInput);
     }
 
     public void getFirstMonthWeeks() {
@@ -108,17 +119,6 @@ public class Homepage extends BaseClass {
 //        for (int i = 0; i<weeks.size(); i++) {
 //
 //        }
-
-    }
-
-    public void selectDepartureDate() {
-        clickOnDepart();
-        waitForElementToBeVisible(calendarDatePicker);
-
-    }
-
-
-    public void selectReturnDate() {
 
     }
 

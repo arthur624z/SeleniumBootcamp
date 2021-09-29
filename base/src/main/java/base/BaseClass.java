@@ -27,6 +27,7 @@ public class BaseClass {
     public static WebDriver driver;
     public static WebDriverWait driverWait;
     public static ExtentReports extent;
+    public static DataReader dataReader = new DataReader();
 
     @BeforeSuite (alwaysRun = true)
     public void beforeSuiteExtentSetup(ITestContext context) {
@@ -147,9 +148,6 @@ public class BaseClass {
     public String getTextFromAlert() {
         return driver.switchTo().alert().getText();
     }
-
-
-
 
     public void sendKeysToInput(WebElement element, String keys) {
         driverWait.until(ExpectedConditions.visibilityOf(element));

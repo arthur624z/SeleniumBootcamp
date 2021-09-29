@@ -11,7 +11,6 @@ public class TestHomepage extends TestBase {
     @Test
     public void navToHomepage() throws Exception {
         homepage = getHomepage();
-        homepage.clickOnDepart();
         homepage.getFirstMonthWeeks();
     }
 }

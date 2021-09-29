@@ -4,6 +4,7 @@
 /.idea
 *.iml
 *.html
+*/target
 
 # Compiled class file
 *.class

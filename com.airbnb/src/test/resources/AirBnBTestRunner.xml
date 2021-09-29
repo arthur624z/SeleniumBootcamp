@@ -2,12 +2,17 @@
 
 <suite name="Functional" verbose="1" >
     <test name="Homepage" >
+        <!--        <groups>-->
+        <!--            <run>-->
+        <!--                <include name="Regression"/>-->
+        <!--            </run>-->
+        <!--        </groups>-->
         <classes>
             <!--            <class name="testPom.TestHomepage"/>-->
-            <class name="testPom.TestHomepage"/>
+            <class name="testPom.TestHomepage"></class>
         </classes>
     </test>
 
-    <parameter name="url" value="https://www.jetblue.com"/>
+    <parameter name="url" value="https://airbnb.com"/>
     <parameter name="browserName" value="chrome"/>
 </suite>
