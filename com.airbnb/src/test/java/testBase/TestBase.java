@@ -1,46 +1,32 @@
 package testBase;
 
 import base.BaseClass;
-
-import java.util.List;
+import org.openqa.selenium.ElementNotVisibleException;
+import org.openqa.selenium.WebElement;
+import pom.Homepage;
+import pom.OnlineExperiencesHomePage;
 
 public class TestBase extends BaseClass {
 
-    public static boolean compareListsOfString(List<String> actual, List<String> expected) {
-        boolean flag;
-
-        int length = actual.size();
-        int count = 0;
-
-        for (int i = 0; i < length; i++) {
-            String actualString = actual.get(i);
-            String expString = expected.get(i);
-
-            if (!actualString.trim().equalsIgnoreCase(expString)) {
-                count++;
-                System.out.println("***MISMATCH***");
-                System.out.println("ACTUAL: " + actualString);
-                System.out.println("EXPECTED: " + expString);
-            }
-        }
-
-        if (count > 0) {
-            flag = false;
-        } else {
-            flag = true;
-        }
-
-        return flag;
+    public Homepage getHomepage() {
+        return new Homepage();
     }
 
-    public boolean compareTwoStrings(String str1, String str2) {
+    public OnlineExperiencesHomePage getOnlineExperiences() {
+        return new OnlineExperiencesHomePage();
+    }
+
+
+    public boolean isElementPresent(WebElement element) {
         boolean flag = false;
 
-        if (str1.trim().equalsIgnoreCase(str2.trim())) {
-            flag = true;
+        try {
+            if (element.isDisplayed()) {
+                flag = true;
+            }
+        } catch (ElementNotVisibleException e) {
+            e.printStackTrace();
         }
-
         return flag;
     }
-
 }

@@ -4,9 +4,13 @@ import base.BaseClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.FindBy;
+import org.testng.asserts.SoftAssert;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
+
+
 
 public class Homepage extends BaseClass {
 
@@ -14,32 +18,43 @@ public class Homepage extends BaseClass {
         PageFactory.initElements(driver, this);
     }
 
-    public List<String> getExploreNearbyElements() {
-        List<String> cityNames = new ArrayList<>();
-        List<WebElement> elementList = driver.findElements(By.cssSelector(getExploreNearbyCityNamesElements()));
+    @FindBy(xpath="//div[5]//form/div[1]/div[2]/a")
+    public WebElement onlineExperience;
 
-        for (int i = 0; i < elementList.size(); i++){
-            cityNames.add(i, elementList.get(i).getText());
+   /**
+   1
+    */
+
+
+    public OnlineExperiencesHomePage navigateToOnlineExperiences(){
+        clickOnElement(onlineExperience);
+        System.out.println("clicked");
+        return new OnlineExperiencesHomePage();
+    }
+
+    public void createDates(WebElement clickDate, WebElement startDate,WebElement endDate){
+        clickOnElement(clickDate);
+        clickOnElement(startDate);
+        clickOnElement(endDate);
+    }
+
+    public void createAdultsGuests(WebElement clickGuests, WebElement numAdults){
+        clickOnElement(clickGuests);
+        clickOnElement(numAdults);
+    }
+
+    public void assertOneDList(List<String> tested, String sheetname) throws IOException {
+        String relPath = ABSOLUTE_PATH + "/src/test/resources/AirBnBTC.xlsx";
+        SoftAssert softAssert = new SoftAssert();
+        String[] expectedText = dataReader.fileReaderStringXSSF(relPath, sheetname);
+        int length = tested.size();
+        for (int i = 0; i < length; i++) {
+            System.out.println("EXPECTED: " + expectedText[i] + "\nACTUAL: " + tested.get(i));
+            softAssert.assertEquals(tested.get(i), expectedText[i]);
         }
-        return cityNames;
+        softAssert.assertAll();
     }
 
-    public List<String> getExploreNearbyElementURLs() {
-        List<String> urls = new ArrayList<>();
-        List<WebElement> elements = driver.findElements(By.cssSelector(getExploreNearbyCityURLElements()));
 
-        for (int i = 0; i < elements.size(); i++) {
-            urls.add(i, elements.get(i).getAttribute("href"));
-        }
-        return urls;
-    }
-
-    private String getExploreNearbyCityNamesElements() {
-        return "#site-content div._m35t2y > div a > span:nth-child(2) span._pihus2:nth-child(1)";
-    }
-
-    private String getExploreNearbyCityURLElements() {
-        return "#site-content div._m35t2y > div a";
-    }
 
 }

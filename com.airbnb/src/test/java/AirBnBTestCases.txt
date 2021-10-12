@@ -1,2 +1,0 @@
-TEST CASE ID 02941 - Validate all city names in `Explore Nearby` div
-TEST CASE ID 02942 - Validate URLs of all cities in `Explore Nearby` div
